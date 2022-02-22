@@ -1,6 +1,9 @@
+#ifndef PARSER_H
+#define PARSER_H
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
 
 namespace SLCJON002
 {
@@ -10,5 +13,6 @@ namespace SLCJON002
     int num;
     std::string txt;
   };
-
+  void clear(void);
 }
+#endif

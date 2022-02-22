@@ -1,5 +1,5 @@
 parser: driver.cpp parser.cpp
-	g++ -o parser driver.cpp parser.cpp -I.
+	g++ -o parser driver.cpp parser.cpp -std=c++2a
 
 # #driver.exe: factorial.o driver.o
 # 	g++ factorial.o driver.o -o driver.exe -std=c++20
