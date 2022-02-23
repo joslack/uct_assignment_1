@@ -1,14 +1,14 @@
 #include "parser.h"
-#define cout std::cout
-#define cin std::cin
-#define clear SLCJON002::clear
-#define TagStruct SLCJON002::TagStruct
-#define vector std::vector
+using SLCJON002::clear;
+using SLCJON002::TagStruct;
+using std::cin;
+using std::cout;
+using std::vector;
 
 int main(void)
 {
   bool breakflag = false;
-  char input;
+  char input = 0;
   vector<TagStruct> tags;
   for (;;)
   {
@@ -25,6 +25,7 @@ int main(void)
 
     case 'r':
       clear();
+      SLCJON002::print_available_files("testcases");
       cout << "Please enter the name of the file to be parsed: " << std::endl;
       input = 0;
       break;

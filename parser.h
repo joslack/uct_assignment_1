@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <cstdlib>
+#include <filesystem>
 
 namespace SLCJON002
 {
@@ -15,7 +16,7 @@ namespace SLCJON002
   };
   void clear(void);
 
-  void print_available_files(void);
+  void print_available_files(std::string directory);
 
   std::vector<TagStruct> read_file(std::vector<std::string> filename);
   void print_tags(std::vector<TagStruct> tags);
