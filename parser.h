@@ -15,9 +15,11 @@ namespace SLCJON002
   };
   void clear(void);
 
-  TagStruct read_file(std::string filename);
-  void print_tags(TagStruct tags);
-  void dump_tags(TagStruct tags);
-  void list(TagStruct tags);
+  void print_available_files(void);
+
+  std::vector<TagStruct> read_file(std::vector<std::string> filename);
+  void print_tags(std::vector<TagStruct> tags);
+  void dump_tags(std::vector<TagStruct> tags);
+  void list(std::string tag, std::vector<TagStruct> tags);
 }
 #endif

@@ -3,12 +3,13 @@
 #define cin std::cin
 #define clear SLCJON002::clear
 #define TagStruct SLCJON002::TagStruct
+#define vector std::vector
 
 int main(void)
 {
   bool breakflag = false;
   char input;
-  TagStruct tags;
+  vector<TagStruct> tags;
   for (;;)
   {
     if (!input)
