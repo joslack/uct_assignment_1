@@ -63,7 +63,9 @@ int main(void)
       breakflag = true;
       break;
     };
-    clear() if (breakflag) break;
+    clear();
+    if (breakflag)
+      break;
   }
   return 0;
 }
