@@ -14,5 +14,10 @@ namespace SLCJON002
     std::string txt;
   };
   void clear(void);
+
+  TagStruct read_file(std::string filename);
+  void print_tags(TagStruct tags);
+  void dump_tags(TagStruct tags);
+  void list(TagStruct tags);
 }
 #endif
