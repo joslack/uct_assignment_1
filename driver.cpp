@@ -36,6 +36,8 @@ int main(void)
       breakflag = true;
       break;
     };
+    if (breakflag)
+      break;
     std::cout << "m: access the menu\nq: quit\npress m,q followed by ENTER: ";
     std::cin >> input;
     switch (input)
