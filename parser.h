@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 
 namespace SLCJON002
 {

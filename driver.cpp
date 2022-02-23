@@ -1,21 +1,22 @@
 #include "parser.h"
+#include <iostream>
 using SLCJON002::clear;
 using SLCJON002::TagStruct;
-using std::cin;
-using std::cout;
-using std::vector;
 
 int main(void)
 {
   bool breakflag = false;
   char input = 0;
-  vector<TagStruct> tags;
+  std::string name;
+  std::string dirname;
+  std::string filename;
+
   for (;;)
   {
     if (!input)
     {
-      cout << "r: read and process input file.\np: print all tags.\nd: dump tags and data to file.\nl: list data for a specific tag.\nq: quit\npress r,p,d,l, or q followed by ENTER: ";
-      cin >> input;
+      std::cout << "r: read and process input file.\np: print all tags.\nd: dump tags and data to file.\nl: list data for a specific tag.\nq: quit\npress r,p,d,l, or q followed by ENTER: ";
+      std::cin >> input;
     }
 
     clear();
@@ -25,23 +26,27 @@ int main(void)
 
     case 'r':
       clear();
-      SLCJON002::print_available_files("testcases");
-      cout << "Please enter the name of the file to be parsed: " << std::endl;
+
+      dirname = "testcases/";
+      SLCJON002::print_available_files(dirname);
+
+      std::cout << "Please enter the name of the file to be parsed: ";
+
       input = 0;
       break;
 
     case 'p':
-      cout << "print tags\n";
+      std::cout << "print tags\n";
       input = 0;
       break;
 
     case 'd':
-      cout << "dump tags\n";
+      std::cout << "dump tags\n";
       input = 0;
       break;
 
     case 'l':
-      cout << "list data for tag\n";
+      std::cout << "list data for tag\n";
       input = 0;
       break;
 
@@ -52,8 +57,8 @@ int main(void)
     if (breakflag)
       break;
 
-    cout << "m: access the menu\nq: quit\npress m,q followed by ENTER: ";
-    cin >> input;
+    std::cout << "m: access the menu\nq: quit\npress m,q followed by ENTER: ";
+    std::cin >> input;
     switch (input)
     {
 
