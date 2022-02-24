@@ -7,6 +7,7 @@ int main(void)
   bool breakflag = false;
   char input = 0;
   std::string dirname = "testcases/";
+  std::string xml;
 
   for (;;)
   {
@@ -23,7 +24,8 @@ int main(void)
 
     case 'r':
       clear();
-      SLCJON002::read_file(dirname);
+      xml = SLCJON002::read_file(dirname);
+      tags = SLCJON002::parse_xml(xml);
       input = 0;
       break;
 

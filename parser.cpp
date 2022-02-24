@@ -32,4 +32,5 @@ void SLCJON002::read_file(std::string dirname)
   char c;
   std::cin >> c;
   SLCJON002::clear();
+  return xml;
 }
