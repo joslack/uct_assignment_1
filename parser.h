@@ -1,5 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -17,12 +18,11 @@ namespace SLCJON002
   };
   void clear(void);
 
-  void print_available_files(std::string directory);
+  void read_file(std::string dirname);
 
   // TODO
-  std::vector<TagStruct> read_file(std::vector<std::string> filename);
-  void print_tags(std::vector<TagStruct> tags);
-  void dump_tags(std::vector<TagStruct> tags);
-  void list(std::string tag, std::vector<TagStruct> tags);
+  void print_tags(std::vector<TagStruct>);
+  void dump_tags(std::vector<TagStruct>);
+  void list(std::string tag, std::vector<TagStruct>);
 }
 #endif

@@ -1,12 +1,8 @@
-parser: driver.cpp parser.cpp
-	g++ -o parser driver.cpp parser.cpp -std=c++2a
-
-# #driver.exe: factorial.o driver.o
-# 	g++ factorial.o driver.o -o driver.exe -std=c++20
-# factorial.o: factorial.cpp
-# 	g++ -c factorial.cpp -o factorial.o -std=c++20
-# driver.o: driver.cpp
-# 	g++ -c driver.cpp -o driver.o -std=c++20
-# clean:
-# 	rm *.o driver.exe
-# #
+driver.exe: driver.o parser.o
+	g++ parser.o driver.o -o parser.exe -std=c++2a
+parser.exe: parser.cpp
+	g++ -c parser.cpp -o parser.o -std=c++2a
+driver.o: driver.cpp
+	g++ -c driver.cpp -o driver.o -std=c++2a
+clean:
+	rm *.o parser.exe

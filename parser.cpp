@@ -1,20 +1,38 @@
 #include "parser.h"
-
+#include <experimental/filesystem>
 void SLCJON002::clear(void) { system("clear"); }
 
-void SLCJON002::print_available_files(std::string directory)
+void SLCJON002::read_file(std::string dirname)
 {
-  /**
-   * takes the name of directory and prints the available files to the command line
-   *
-   * see https://stackoverflow.com/questions/62409409/how-to-make-stdfilesystemdirectory-iterator-to-list-filenames-in-order
-   * for reference
-   */
-  std::cout << "Available Files:" << std::endl;
-  for (const auto &entry : std::filesystem::directory_iterator(directory))
+  std::string name;
+  std::ifstream in;
+  std::string line;
+  std::vector<std::string> lines;
+
+  std::cout << "Please enter the name of the file to be parsed: ";
+  std::cin >> name;
+  std::string filename = dirname + name;
+  in.open(filename);
+  while (!in)
   {
-    std::string name = entry.path().string(); // convert filesystem_entry to string
-    size_t idx = name.find('/');
-    std::cout << name.substr(idx + 1) << std::endl;
+    std::cout << "Please enter a valid filename: ";
+    std::cin >> name;
+    filename = dirname + name;
+    in.open(filename);
   }
+
+  while (std::getline(in, line))
+  {
+    lines.push_back(line);
+  }
+  in.close();
+
+  for (auto item : lines)
+  {
+    std::cout << item << std::endl;
+  }
+  std::cout << "Press c followed by ENTER to continue: ";
+  char c;
+  std::cin >> c;
+  SLCJON002::clear();
 }

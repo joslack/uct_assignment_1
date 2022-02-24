@@ -1,15 +1,12 @@
 #include "parser.h"
-#include <iostream>
 using SLCJON002::clear;
-using SLCJON002::TagStruct;
 
 int main(void)
 {
+  std::vector<SLCJON002::TagStruct> tags;
   bool breakflag = false;
   char input = 0;
-  std::string name;
-  std::string dirname;
-  std::string filename;
+  std::string dirname = "testcases/";
 
   for (;;)
   {
@@ -26,12 +23,7 @@ int main(void)
 
     case 'r':
       clear();
-
-      dirname = "testcases/";
-      SLCJON002::print_available_files(dirname);
-
-      std::cout << "Please enter the name of the file to be parsed: ";
-
+      SLCJON002::read_file(dirname);
       input = 0;
       break;
 
