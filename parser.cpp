@@ -91,22 +91,7 @@ std::vector<SLCJON002::TagStruct> SLCJON002::parse_xml(std::string xml)
         ++i;
       }
       --i;
-      if (xml[i + 2] == '/')
-        txtStack.push(txt);
-      else
-      {
-        for (auto j = 0; j < tags.size(); j++)
-        {
-          if (tag == tags[j].name)
-          {
-            if (tags[j].txt == "")
-              tags[j].txt = txt;
-            else
-              tags[j].txt = tags[j].txt + ":" + txt;
-            tags[j].num += 1;
-          }
-        }
-      }
+      txtStack.push(txt);
       txt = "";
       tag = "";
     }

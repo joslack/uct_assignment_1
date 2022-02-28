@@ -25,8 +25,9 @@ namespace SLCJON002
   std::string read_file(std::string dirname);
   std::vector<TagStruct> parse_xml(std::string xml);
   void print_tags(std::vector<TagStruct>);
+  void list(std::string tag, std::vector<TagStruct>);
   // TODO
   void dump_tags(std::vector<TagStruct>);
-  void list(std::string tag, std::vector<TagStruct>);
+
 }
 #endif
