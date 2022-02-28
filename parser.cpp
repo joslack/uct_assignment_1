@@ -1,6 +1,11 @@
 #include "parser.h"
 void SLCJON002::clear(void) { system("clear"); }
 
+void SLCJON002::print_tag_struct(SLCJON002::TagStruct tagstruct)
+{
+  std::cout << "TagStruct{" + tagstruct.name << ", " << tagstruct.num << ", " << tagstruct.txt + "}" << std::endl;
+}
+
 std::string SLCJON002::read_file(std::string dirname)
 {
   std::string name;
@@ -31,67 +36,93 @@ std::string SLCJON002::read_file(std::string dirname)
 
 std::vector<SLCJON002::TagStruct> SLCJON002::parse_xml(std::string xml)
 {
-  std::vector<size_t> open_idx;
-  std::vector<size_t> close_idx;
-  std::string tag;
-  std::string txt;
+
+  std::string tag = "";
+  std::string txt = "";
   std::stack<std::string> tagStack;
-  std::stack<std::string> txt_stack;
+  std::stack<std::string> txtStack;
   std::vector<SLCJON002::TagStruct> tags;
+  SLCJON002::TagStruct tag_struct;
 
   for (size_t i = 0; i < xml.length(); i++)
   {
-    // check for open bracket
-    if (xml[i] == '<')
+    if ((xml[i] == '<') && (xml[i + 1] != ' '))
     {
-      open_idx.push_back(i);
       // gather tag in between brackets
       ++i;
       while (xml[i] != '>')
       {
-
-        // edge case where string happens to contain an open carrot
-        if (xml[i] == '<')
-        {
-          open_idx.pop_back();
-          open_idx.push_back(i);
-          tag = "";
-        }
-        // otherwise record tag and move idx
-        else
-        {
-          tag = tag + xml[i];
-        }
+        tag = tag + xml[i];
         ++i;
       }
-      close_idx.push_back(i + 1);
-      if (!tagStack.size())
+      // add tag to stack
+      if (tagStack.empty() || (tagStack.top() != tag.substr(1)))
         tagStack.push(tag);
-      if (tag.substr(1) == tagStack.top())
-      {
-        std::cout << tagStack.top() << ": ";
-        std::cout << txt_stack.top() << std::endl;
-        tagStack.pop();
-        txt_stack.pop();
-      }
       else
-        tagStack.push(tag);
-      txt_stack.push(txt);
-      tag = "";
+      {
+        // check if tag close
+        if (tagStack.top() == tag.substr(1))
+        {
+          // ensure that there are not duplicate tags
+          bool dupe = false;
+          for (auto i = 0; i < tags.size(); i++)
+          {
+            if (tags[i].name == tagStack.top())
+            {
+              tags[i].txt = tags[i].txt + ":" + txtStack.top();
+              tags[i].num++;
+              dupe = true;
+            }
+          }
+          if (!dupe)
+          {
+            tag_struct = {tagStack.top(), 1, txtStack.top()};
+            tags.push_back(tag_struct);
+          }
+          tagStack.pop();
+          txtStack.pop();
+        }
+      }
+      // gather text after tag
+      ++i;
+      while (xml[i] != '<' || (xml[i] == '<' && xml[i + 1] == ' '))
+      {
+        txt = txt + xml[i];
+        ++i;
+      }
+      --i;
+      if (xml[i + 2] == '/')
+        txtStack.push(txt);
+      else
+      {
+        for (auto j = 0; j < tags.size(); j++)
+        {
+          if (tag == tags[j].name)
+          {
+            if (tags[j].txt == "")
+              tags[j].txt = txt;
+            else
+              tags[j].txt = tags[j].txt + ":" + txt;
+            tags[j].num += 1;
+          }
+        }
+      }
       txt = "";
+      tag = "";
     }
   }
-  size_t o_idx = 1;
-  size_t c_idx = 0;
-  while (o_idx < close_idx.size())
-  {
-    std::cout << xml.substr(close_idx[c_idx], open_idx[o_idx] - close_idx[c_idx]);
-    ++o_idx;
-    ++c_idx;
-  }
-  std::cout << "Press c followed by ENTER to continue: ";
-  char c;
-  std::cin >> c;
+
   SLCJON002::clear();
   return tags;
+}
+
+void SLCJON002::list(std::string tag, std::vector<SLCJON002::TagStruct> tags)
+{
+  for (auto i : tags)
+  {
+    if (i.name == tag)
+    {
+      print_tag_struct(i);
+    }
+  }
 }

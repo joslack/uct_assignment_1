@@ -8,6 +8,7 @@ int main(void)
   char input = 0;
   std::string dirname = "testcases/";
   std::string xml;
+  std::string tag;
 
   for (;;)
   {
@@ -30,7 +31,11 @@ int main(void)
       break;
 
     case 'p':
-      std::cout << "print tags\n";
+      for (auto i : tags)
+      {
+        SLCJON002::print_tag_struct(i);
+      }
+      std::cout << std::endl;
       input = 0;
       break;
 
@@ -40,7 +45,9 @@ int main(void)
       break;
 
     case 'l':
-      std::cout << "list data for tag\n";
+      std::cout << "Enter the name of the tag you would like printed and press ENTER: ";
+      std::cin >> tag;
+      SLCJON002::list(tag, tags);
       input = 0;
       break;
 
